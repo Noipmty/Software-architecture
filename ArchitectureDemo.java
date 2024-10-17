@@ -12,7 +12,7 @@ public class ArchitectureDemo extends JFrame {
     private JMenuItem menuItem2;
     private JMenuItem menuItem3;
     private JMenuItem menuItem4;
-    private JTextField inputTextField;
+    private JTextArea inputTextArea; // 更改为JTextArea以支持多行输入
     private JButton submitButton;
     private JButton viewButton; // 查看按钮
 
@@ -44,7 +44,9 @@ public class ArchitectureDemo extends JFrame {
 
         setJMenuBar(menuBar);
 
-        inputTextField = new JTextField(20);
+        inputTextArea = new JTextArea(5, 20); // 设置为5行20列
+        JScrollPane inputScrollPane = new JScrollPane(inputTextArea); // 为输入文本区域添加滚动条
+
         submitButton = new JButton("提交");
         viewButton = new JButton("查看"); // 创建查看按钮
 
@@ -52,7 +54,7 @@ public class ArchitectureDemo extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     // 写入内容到 input.txt 文件
-                    writeToFile("C:\\tool\\IntelliJ IDEA 2024.1\\project\\Works\\src\\软件体系结构\\实验二\\input.txt", inputTextField.getText());
+                    writeToFile("C:\\tool\\IntelliJ IDEA 2024.1\\project\\Works\\src\\软件体系结构\\实验二\\input.txt", inputTextArea.getText());
                     textArea.append("文件已更新\n");
                     // 读取 input.txt 文件内容并显示
                     readInputFile();
@@ -70,7 +72,7 @@ public class ArchitectureDemo extends JFrame {
         });
 
         JPanel inputPanel = new JPanel(new FlowLayout());
-        inputPanel.add(inputTextField);
+        inputPanel.add(inputScrollPane); // 将输入文本区域添加到面板
         inputPanel.add(submitButton);
         inputPanel.add(viewButton); // 将查看按钮添加到面板
 
@@ -89,8 +91,7 @@ public class ArchitectureDemo extends JFrame {
         menuItem2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 processFile("object-oriented");
-                // 假设 mxdx 方法在 软件体系结构.实验二.面向对象软件体系结构.Main 类中
-                 软件体系结构.实验二.面向对象软件体系结构.Main.mxdx();
+                软件体系结构.实验二.面向对象软件体系结构.Main.mxdx();
             }
         });
 
